@@ -3,7 +3,7 @@ package org.blueo.cucumber.assertj.hard;
 import java.util.List;
 
 import org.blueo.cucumber.element.Element;
-import org.blueo.cucumber.vo.Person;
+import org.blueo.models.person.Person;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableMap;

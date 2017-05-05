@@ -79,6 +79,14 @@
 			<artifactId>assertj-core</artifactId>
 			<version>3.6.2</version>
 		</dependency>
+
+		<!-- test -->
+		<dependency>
+			<groupId>org.blueo</groupId>
+			<artifactId>models</artifactId>
+			<version>1.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 </project>

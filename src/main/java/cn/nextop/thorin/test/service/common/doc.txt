@@ -1,1 +1,0 @@
-Services in this package cannot extends AbstractService.java

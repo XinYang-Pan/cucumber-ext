@@ -61,6 +61,19 @@
 			<version>${spring.version}</version>
 		</dependency>
 
+		<!-- test will use -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
 		<!-- specific -->
 		<dependency>
 			<groupId>info.cukes</groupId>

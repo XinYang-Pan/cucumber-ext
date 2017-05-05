@@ -74,7 +74,7 @@ public class PopulateUtils {
 					Method m = pd.getWriteMethod();
 					if (m != null) {
 						Object parseString = ParseUtils.parseString(value, pd.getPropertyType());
-						Preconditions.checkNotNull(target.getValue0(), String.format("Inner Object is null, you have to create it yourself. ref=%s", rawName));
+						Preconditions.checkNotNull(target.getValue0(), String.format("Inner Object is null, you have to create it yourself. target=%s, rawName=%s", target, rawName));
 						m.invoke(target.getValue0(), parseString);
 					} else {
 						if (!ignoreNoneMatches) {

@@ -1,9 +1,8 @@
-package org.blueo.cucumber.thorin.test.assertj;
+package org.blueo.cucumber.assertj;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 
-import org.blueo.cucumber.assertj.AssertjUtils;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 

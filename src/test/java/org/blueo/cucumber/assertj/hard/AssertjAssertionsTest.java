@@ -1,10 +1,9 @@
-package org.blueo.cucumber.test.assertj.hard;
+package org.blueo.cucumber.assertj.hard;
 
 import java.util.List;
 
-import org.blueo.cucumber.Person;
-import org.blueo.cucumber.assertj.hard.AssertjAssertions;
 import org.blueo.cucumber.element.Element;
+import org.blueo.cucumber.vo.Person;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableMap;
@@ -29,7 +28,7 @@ public class AssertjAssertionsTest {
 		// 
 		AssertjAssertions.assertThat(actualList).isEachMatchTo(expectedList, true);
 	}
-	
+
 	@Test()
 	public void testListAssertThat_ignoring_order() {
 		// 
@@ -79,7 +78,7 @@ public class AssertjAssertionsTest {
 		expectedList.add(new Element(ImmutableMap.of("name", "BB", "age", "20")));
 		expectedList.add(new Element(ImmutableMap.of("name", "CC", "age", "31")));
 		expectedList.add(new Element(ImmutableMap.of("name", "DD", "age", "40")));
-		
+
 		// 
 		AssertjAssertions.assertThat(actualList).isEachMatchTo(expectedList, true);
 	}
@@ -98,7 +97,7 @@ public class AssertjAssertionsTest {
 		expectedList.add(new Element(ImmutableMap.of("name", "BB", "age", "20")));
 		expectedList.add(new Element(ImmutableMap.of("name", "BB", "age", "20")));
 		expectedList.add(new Element(ImmutableMap.of("name", "DD", "age", "40")));
-		
+
 		// 
 		AssertjAssertions.assertThat(actualList).isEachMatchTo(expectedList, true);
 	}

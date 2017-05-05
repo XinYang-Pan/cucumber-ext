@@ -3,7 +3,9 @@ package org.blueo.cucumber.element;
 import java.util.Map;
 import java.util.Objects;
 
-import org.blueo.cucumber.parse.ParseUtils;
+import org.blueo.cucumber.util.FieldUtils;
+import org.blueo.cucumber.util.ParseUtils;
+import org.blueo.cucumber.util.PopulateUtils;
 import org.javatuples.Pair;
 
 class Entry {
@@ -26,7 +28,7 @@ class Entry {
 	}
 
 	public void putValueTo(Object target) {
-		ParseUtils.populateField(target, key, value);
+		PopulateUtils.populateField(target, key, value);
 	}
 
 	public <T> T getValue(Class<T> type) {
@@ -45,7 +47,7 @@ class Entry {
 	@SuppressWarnings("unchecked")
 	public boolean matchesFieldByKey(Object target) {
 		// 
-		Pair<Object, Class<?>> fieldValueAndType = ParseUtils.getFieldValueAndType(target, key);
+		Pair<Object, Class<?>> fieldValueAndType = FieldUtils.getFieldValueAndType(target, key);
 		Class<?> type = fieldValueAndType.getValue1();
 		Object actualValue = fieldValueAndType.getValue0();
 		Object expectedValue = this.getValue(type);

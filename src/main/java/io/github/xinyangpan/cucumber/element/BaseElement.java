@@ -14,12 +14,12 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.util.Assert;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import io.github.xinyangpan.cucumber.keyword.YesOrNo;
 import io.github.xinyangpan.cucumber.util.ElementUtils;
-import io.github.xinyangpan.cucumber.util.FieldLocator;
 
 public class BaseElement {
 	public static final String IGNORE_ROW = "_ignoreRow";
@@ -60,16 +60,16 @@ public class BaseElement {
 	public void putValuesTo(Object target) {
 		BeanWrapperImpl beanWrapperImpl = ElementUtils.newBeanWrapperImpl(target);
 		for (Entry<String, String> e : this.getEligibleEntries()) {
-			FieldLocator fieldLocator = new FieldLocator(e.getKey());
-			initNullObjectIfNeeded(beanWrapperImpl, fieldLocator.getPrefixes());
+			initNullObjectIfNeeded(beanWrapperImpl, e.getKey());
 			beanWrapperImpl.setPropertyValue(e.getKey(), e.getValue());
 		}
 	}
 
-	private void initNullObjectIfNeeded(BeanWrapperImpl beanWrapperImpl, String[] prefixes) {
+	private void initNullObjectIfNeeded(BeanWrapperImpl beanWrapperImpl, String fieldString) {
+		List<String> strings = Splitter.on('.').splitToList(fieldString);
 		String propertyName = "";
-		for (int i = 0; i < prefixes.length; i++) {
-			propertyName += prefixes[i];
+		for (int i = 1; i < strings.size(); i++) {
+			propertyName += strings.get(i - 1);
 			Object propertyValue = beanWrapperImpl.getPropertyValue(propertyName);
 			if (propertyValue == null) {
 				Class<?> propertyType = beanWrapperImpl.getPropertyType(propertyName);

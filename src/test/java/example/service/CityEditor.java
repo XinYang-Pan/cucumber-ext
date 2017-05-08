@@ -2,7 +2,7 @@ package example.service;
 
 import java.beans.PropertyEditorSupport;
 
-import org.blueo.models.person.City;
+import io.github.xinyangpan.models.person.City;
 
 public class CityEditor extends PropertyEditorSupport {
 

@@ -3,7 +3,8 @@ package example.service;
 import java.util.List;
 
 import org.assertj.core.util.Lists;
-import org.blueo.models.person.Person;
+
+import io.github.xinyangpan.models.person.Person;
 
 public class PersonService {
 	private List<Person> persons = Lists.newArrayList();

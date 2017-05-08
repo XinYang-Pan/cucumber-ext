@@ -1,7 +1,7 @@
 package example.service;
 
-import org.blueo.cucumber.util.ElementUtils;
-import org.blueo.models.person.City;
+import io.github.xinyangpan.cucumber.util.ElementUtils;
+import io.github.xinyangpan.models.person.City;
 
 public class CucumberUtils {
 

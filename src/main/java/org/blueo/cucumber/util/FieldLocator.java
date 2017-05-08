@@ -7,11 +7,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Preconditions;
 
-class FieldLocator {
+public class FieldLocator {
 	private final String[] prefixes;
 	private final String fieldName;
 
-	FieldLocator(String rawName) {
+	public FieldLocator(String rawName) {
 		Preconditions.checkArgument(StringUtils.isNotEmpty(rawName));
 		//
 		String[] names = rawName.split("\\.");

@@ -1,7 +1,11 @@
 package org.blueo.cucumber.element;
 
+import static org.blueo.cucumber.util.ElementUtils.TYPE_CONVERTER;
+
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
@@ -9,9 +13,12 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.blueo.cucumber.keyword.YesOrNo;
-import org.blueo.cucumber.util.ParseUtils;
+import org.blueo.cucumber.util.ElementUtils;
+import org.blueo.cucumber.util.FieldLocator;
+import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.util.Assert;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -26,28 +33,51 @@ public class Element {
 	}
 
 	public <T> Optional<T> getValueOpt(String key, Class<T> type) {
-		return Optional.ofNullable(ParseUtils.parseString(keyValueMap.get(key), type));
+		return Optional.ofNullable(this.getValue(key, type));
 	}
 
 	public <T> T getValue(String key, Class<T> type) {
 		String value = keyValueMap.get(key);
 		Assert.notNull(value, String.format("Not value found for key[%s]", key));
-		return ParseUtils.parseString(value, type);
+		return TYPE_CONVERTER.convertIfNecessary(value, type);
 	}
 
 	public <T> T getValue(String key, T defaultValue) {
-		return ParseUtils.parseString(keyValueMap.get(key), defaultValue);
-	}
-
-	public void putValuesTo(Object target) {
-		for (Entry e : this.getEligibleEntries()) {
-			e.putValueTo(target);
+		Preconditions.checkNotNull(defaultValue);
+		String value = keyValueMap.get(key);
+		if (value == null) {
+			return defaultValue;
+		}
+		// 
+		@SuppressWarnings("unchecked")
+		T t = this.getValue(key, (Class<T>) defaultValue.getClass());
+		if (t == null) {
+			return defaultValue;
+		} else {
+			return t;
 		}
 	}
 
-	public void putValuesTo(Map<String, String> target) {
-		for (Entry e : this.getEligibleEntries()) {
-			target.put(e.getKey(), e.getValue());
+	public void putValuesTo(Object target) {
+		BeanWrapperImpl beanWrapperImpl = new BeanWrapperImpl(target);
+		for (Entry<String, String> e : this.getEligibleEntries()) {
+			FieldLocator fieldLocator = new FieldLocator(e.getKey());
+			initNullObjectIfNeeded(beanWrapperImpl, fieldLocator.getPrefixes());
+			beanWrapperImpl.setPropertyValue(e.getKey(), e.getValue());
+		}
+	}
+
+	private void initNullObjectIfNeeded(BeanWrapperImpl beanWrapperImpl, String[] prefixes) {
+		String propertyName = "";
+		for (int i = 0; i < prefixes.length; i++) {
+			propertyName += prefixes[i];
+			Object propertyValue = beanWrapperImpl.getPropertyValue(propertyName);
+			if (propertyValue == null) {
+				Class<?> propertyType = beanWrapperImpl.getPropertyType(propertyName);
+				Object instantiate = ElementUtils.newInstance(propertyType);
+				beanWrapperImpl.setPropertyValue(propertyName, instantiate);
+			}
+			propertyName += ".";
 		}
 	}
 
@@ -79,11 +109,22 @@ public class Element {
 	 * @param target
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public boolean matches(Object target) {
 		// 
-		for (Entry e : this.getEligibleEntries()) {
-			if (!e.matchesFieldByKey(target)) {
-				return false;
+		BeanWrapperImpl beanWrapperImpl = new BeanWrapperImpl(target);
+		for (Entry<String, String> e : this.getEligibleEntries()) {
+			Object actualValue = beanWrapperImpl.getPropertyValue(e.getKey());
+			Object expectedValue = ElementUtils.TYPE_CONVERTER.convertIfNecessary(e.getValue(), beanWrapperImpl.getPropertyType(e.getKey()));
+			// 
+			if (actualValue instanceof Comparable<?> && expectedValue instanceof Comparable<?>) {
+				if (((Comparable<Object>) actualValue).compareTo(expectedValue) != 0) {
+					return false;
+				}
+			} else {
+				if (!Objects.equals(actualValue, expectedValue)) {
+					return false;
+				}
 			}
 		}
 		return true;
@@ -115,12 +156,11 @@ public class Element {
 	 * 
 	 * @return
 	 */
-	private List<Entry> getEligibleEntries() {
+	private List<Map.Entry<String, String>> getEligibleEntries() {
 		// @formatter:off
 		return keyValueMap.entrySet().stream()
 			.filter(e -> !e.getKey().startsWith("_"))
 			.filter(e -> StringUtils.isNotEmpty(e.getValue()))
-			.map(Entry::new)
 			.collect(Collectors.toList());
 		// @formatter:on
 	}

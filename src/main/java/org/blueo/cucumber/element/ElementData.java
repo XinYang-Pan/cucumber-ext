@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import org.assertj.core.util.Sets;
-import org.springframework.beans.BeanUtils;
+import org.blueo.cucumber.util.ElementUtils;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -33,7 +33,7 @@ public class ElementData {
 			}
 		}
 	}
-	
+
 	// Only Support Element Single Value
 	private Map<String, String> applyVariable(Map<String, String> elementMap, Element scenarioVariable) {
 		if (scenarioVariable == null) {
@@ -44,7 +44,7 @@ public class ElementData {
 		}
 		Map<String, String> maps = Maps.newHashMap(elementMap);
 		for (Entry<String, String> singleVar : scenarioVariable.dataMap().entrySet()) {
-			String variableName = "$"+singleVar.getKey();
+			String variableName = "$" + singleVar.getKey();
 			String variableValue = singleVar.getValue();
 			for (Entry<String, String> e : maps.entrySet()) {
 				if (Objects.equals(variableName, e.getValue())) {
@@ -61,7 +61,7 @@ public class ElementData {
 	public static ElementData of(DataTable dataTable) {
 		return new ElementData(toMapList(dataTable), null);
 	}
-	
+
 	public static ElementData of(DataTable dataTable, Element scenarioVariable) {
 		return new ElementData(toMapList(dataTable), scenarioVariable);
 	}
@@ -120,7 +120,7 @@ public class ElementData {
 	}
 
 	public <T> List<T> getElements(Class<T> clazz) {
-		return getElements(() -> this.newInstance(clazz));
+		return getElements(() -> ElementUtils.newInstance(clazz));
 	}
 
 	public Element getOnlyElement() {
@@ -129,7 +129,7 @@ public class ElementData {
 
 	public <T> T getOnlyElement(Class<T> clazz) {
 		Element element = this.getOnlyElement();
-		T t = newInstance(clazz);
+		T t = ElementUtils.newInstance(clazz);
 		element.putValuesTo(t);
 		return t;
 	}
@@ -137,11 +137,11 @@ public class ElementData {
 	public boolean isEmpty() {
 		return elements.isEmpty();
 	}
-	
+
 	// -----------------------------
 	// ----- private
 	// -----------------------------
-	
+
 	private Set<String> getElementKeys() {
 		if (elements.isEmpty()) {
 			return Sets.newHashSet();
@@ -149,15 +149,10 @@ public class ElementData {
 		return elements.get(0).getKeySet();
 	}
 
-	private <T> T newInstance(Class<T> clazz) {
-		T t = BeanUtils.instantiate(clazz);
-		return t;
-	}
-	
 	// -----------------------------
 	// ----- Get Set ToString HashCode Equals
 	// -----------------------------
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

@@ -1,5 +1,6 @@
-# Cucumber Extension - An Java Extension Util for Cucumber Framework
+# Cucumber Extension
 
+An Java Extension Util for Cucumber Framework
 
 # Overview
 Cucumber is BBD testing framework, from more info - https://cucumber.io/

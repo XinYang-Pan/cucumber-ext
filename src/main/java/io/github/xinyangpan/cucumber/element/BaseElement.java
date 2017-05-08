@@ -1,7 +1,5 @@
 package io.github.xinyangpan.cucumber.element;
 
-import static io.github.xinyangpan.cucumber.util.ElementUtils.TYPE_CONVERTER;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,7 +38,7 @@ public class BaseElement {
 	public <T> T getValue(String key, Class<T> type) {
 		String value = keyValueMap.get(key);
 		Assert.notNull(value, String.format("Not value found for key[%s]", key));
-		return TYPE_CONVERTER.convertIfNecessary(value, type);
+		return ElementUtils.defaultConversionService().convert(value, type);
 	}
 
 	public <T> T getValue(String key, T defaultValue) {
@@ -60,7 +58,7 @@ public class BaseElement {
 	}
 
 	public void putValuesTo(Object target) {
-		BeanWrapperImpl beanWrapperImpl = new BeanWrapperImpl(target);
+		BeanWrapperImpl beanWrapperImpl = ElementUtils.newBeanWrapperImpl(target);
 		for (Entry<String, String> e : this.getEligibleEntries()) {
 			FieldLocator fieldLocator = new FieldLocator(e.getKey());
 			initNullObjectIfNeeded(beanWrapperImpl, fieldLocator.getPrefixes());
@@ -113,10 +111,10 @@ public class BaseElement {
 	@SuppressWarnings("unchecked")
 	public boolean matches(Object target) {
 		// 
-		BeanWrapperImpl beanWrapperImpl = new BeanWrapperImpl(target);
+		BeanWrapperImpl beanWrapperImpl = ElementUtils.newBeanWrapperImpl(target);
 		for (Entry<String, String> e : this.getEligibleEntries()) {
 			Object actualValue = beanWrapperImpl.getPropertyValue(e.getKey());
-			Object expectedValue = ElementUtils.TYPE_CONVERTER.convertIfNecessary(e.getValue(), beanWrapperImpl.getPropertyType(e.getKey()));
+			Object expectedValue = ElementUtils.defaultConversionService().convert(e.getValue(), beanWrapperImpl.getPropertyType(e.getKey()));
 			// 
 			if (actualValue instanceof Comparable<?> && expectedValue instanceof Comparable<?>) {
 				if (((Comparable<Object>) actualValue).compareTo(expectedValue) != 0) {

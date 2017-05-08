@@ -18,7 +18,7 @@ public class AssertjListAssert<E> extends ListAssert<E> {
 		super(actual);
 	}
 
-	public <T extends BaseElement> AssertjListAssert<E> isEachMatchToIgnoringOrder(List<T> keyValueMapList) {
+	public AssertjListAssert<E> isEachMatchToIgnoringOrder(List<? extends BaseElement> keyValueMapList) {
 		// 
 		assertThat(actual).as("size").hasSameSizeAs(keyValueMapList);
 		List<BaseElement> expectedElements = Lists.newArrayList(keyValueMapList);
@@ -49,7 +49,7 @@ public class AssertjListAssert<E> extends ListAssert<E> {
 		}
 	}
 
-	public <T extends BaseElement> AssertjListAssert<E> isEachMatchToInOrder(List<T> keyValueMapList) {
+	public AssertjListAssert<E> isEachMatchToInOrder(List<? extends BaseElement> keyValueMapList) {
 		// 
 		assertThat(actual).as("size").hasSameSizeAs(keyValueMapList);
 		// 
@@ -62,7 +62,7 @@ public class AssertjListAssert<E> extends ListAssert<E> {
 		return this;
 	}
 
-	public <T extends BaseElement> AssertjListAssert<E> isEachMatchTo(List<T> keyValueMapList, boolean ordered) {
+	public AssertjListAssert<E> isEachMatchTo(List<? extends BaseElement> keyValueMapList, boolean ordered) {
 		if (ordered) {
 			return isEachMatchToInOrder(keyValueMapList);
 		} else {

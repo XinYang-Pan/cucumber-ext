@@ -2,28 +2,17 @@ package example.test.step;
 
 import java.util.List;
 
-import com.google.common.reflect.Reflection;
-
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import example.service.CityEditor;
-import example.service.CucumberUtils;
 import example.service.ElementDataService;
 import example.service.PersonService;
 import io.github.xinyangpan.cucumber.assertj.hard.AssertjAssertions;
 import io.github.xinyangpan.cucumber.element.BaseElement;
-import io.github.xinyangpan.cucumber.util.ElementUtils;
-import io.github.xinyangpan.models.person.City;
 import io.github.xinyangpan.models.person.Person;
 
 public class Steps {
-	
-	static {
-		Reflection.initialize(CucumberUtils.class);
-		ElementUtils.TYPE_CONVERTER.registerCustomEditor(City.class, new CityEditor());
-	}
-	
+
 	private PersonService personService = new PersonService();
 	private ElementDataService elementDataService = new ElementDataService();
 

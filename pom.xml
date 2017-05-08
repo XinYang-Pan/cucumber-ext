@@ -95,7 +95,7 @@
 
 		<!-- test -->
 		<dependency>
-			<groupId>org.blueo</groupId>
+			<groupId>io.github.XinYang-Pan</groupId>
 			<artifactId>models</artifactId>
 			<version>1.0</version>
 			<scope>test</scope>

@@ -22,8 +22,8 @@ DataTable Features
 
 Other Features
 
-  1. Support expected failed assersion
-  1. Support scenario variables(incubation)
+1. Support expected failed assersion
+1. Support scenario variables(incubation)
 
 # Examples
 More to come

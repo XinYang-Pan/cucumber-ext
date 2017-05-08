@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.assertj.core.api.AbstractObjectAssert;
 
-import io.github.xinyangpan.cucumber.element.Element;
+import io.github.xinyangpan.cucumber.element.BaseElement;
 
 public abstract class AssertjAbstractAssert<S extends AbstractObjectAssert<S, A>, A> extends AbstractObjectAssert<S, A> {
 
@@ -15,23 +15,23 @@ public abstract class AssertjAbstractAssert<S extends AbstractObjectAssert<S, A>
 	// for Comparable - using compare
 	// others - using equals
 	public S isMatchTo(Map<String, String> keyValueMap) {
-		return isMatchTo(new Element(keyValueMap));
+		return isMatchTo(new BaseElement(keyValueMap));
 	}
 
-	public S isMatchTo(Element element) {
+	public S isMatchTo(BaseElement baseElement) {
 		AssertionError error;
 		try {
-			if (!element.matches(actual)) {
-				failWithMessage("Expected to be <%s> but was <%s>", element, actual);
+			if (!baseElement.matches(actual)) {
+				failWithMessage("Expected to be <%s> but was <%s>", baseElement, actual);
 			}
 			error = null;
 		} catch (AssertionError e) {
 			error = e;
 		}
 		// 
-		if (element.isExpectFail()) {
+		if (baseElement.isExpectFail()) {
 			if (error == null) {
-				failWithMessage("Expected to fail but passed.", element, actual);
+				failWithMessage("Expected to fail but passed.", baseElement, actual);
 			}
 		} else {
 			if (error != null) {

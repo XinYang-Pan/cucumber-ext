@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
 import io.github.xinyangpan.cucumber.assertj.hard.AssertjAssertions;
-import io.github.xinyangpan.cucumber.element.Element;
+import io.github.xinyangpan.cucumber.element.BaseElement;
 import io.github.xinyangpan.models.person.Person;
 
 public class AssertjAssertionsTest {
@@ -22,11 +22,11 @@ public class AssertjAssertionsTest {
 		actualList.add(new Person("CC", 30));
 		actualList.add(new Person("DD", 40));
 		// 
-		List<Element> expectedList = Lists.newArrayList();
-		expectedList.add(new Element(ImmutableMap.of("name", "AA", "age", "10")));
-		expectedList.add(new Element(ImmutableMap.of("name", "BB", "age", "20")));
-		expectedList.add(new Element(ImmutableMap.of("name", "CC", "age", "30")));
-		expectedList.add(new Element(ImmutableMap.of("name", "DD", "age", "40")));
+		List<BaseElement> expectedList = Lists.newArrayList();
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "AA", "age", "10")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "BB", "age", "20")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "CC", "age", "30")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "DD", "age", "40")));
 		// 
 		AssertjAssertions.assertThat(actualList).isEachMatchTo(expectedList, true);
 	}
@@ -40,11 +40,11 @@ public class AssertjAssertionsTest {
 		actualList.add(new Person("CC", 30));
 		actualList.add(new Person("DD", 40));
 		// 
-		List<Element> expectedList = Lists.newArrayList();
-		expectedList.add(new Element(ImmutableMap.of("name", "AA", "age", "10")));
-		expectedList.add(new Element(ImmutableMap.of("name", "CC", "age", "30")));
-		expectedList.add(new Element(ImmutableMap.of("name", "BB", "age", "20")));
-		expectedList.add(new Element(ImmutableMap.of("name", "DD", "age", "40")));
+		List<BaseElement> expectedList = Lists.newArrayList();
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "AA", "age", "10")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "CC", "age", "30")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "BB", "age", "20")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "DD", "age", "40")));
 		// 
 		AssertjAssertions.assertThat(actualList).isEachMatchTo(expectedList, false);
 	}
@@ -58,11 +58,11 @@ public class AssertjAssertionsTest {
 		actualList.add(new Person("CC", 30));
 		actualList.add(new Person("DD", 40));
 		// 
-		List<Element> expectedList = Lists.newArrayList();
-		expectedList.add(new Element(ImmutableMap.of("name", "AA", "age", "10")));
-		expectedList.add(new Element(ImmutableMap.of("name", "CC", "age", "30")));
-		expectedList.add(new Element(ImmutableMap.of("name", "BB", "age", "20")));
-		expectedList.add(new Element(ImmutableMap.of("name", "DD", "age", "40")));
+		List<BaseElement> expectedList = Lists.newArrayList();
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "AA", "age", "10")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "CC", "age", "30")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "BB", "age", "20")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "DD", "age", "40")));
 		// 
 		AssertjAssertions.assertThat(actualList).isEachMatchTo(expectedList, true);
 	}
@@ -75,11 +75,11 @@ public class AssertjAssertionsTest {
 		actualList.add(new Person("CC", 30));
 		actualList.add(new Person("DD", 40));
 		// 
-		List<Element> expectedList = Lists.newArrayList();
-		expectedList.add(new Element(ImmutableMap.of("name", "AA", "age", "10")));
-		expectedList.add(new Element(ImmutableMap.of("name", "BB", "age", "20")));
-		expectedList.add(new Element(ImmutableMap.of("name", "CC", "age", "31")));
-		expectedList.add(new Element(ImmutableMap.of("name", "DD", "age", "40")));
+		List<BaseElement> expectedList = Lists.newArrayList();
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "AA", "age", "10")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "BB", "age", "20")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "CC", "age", "31")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "DD", "age", "40")));
 
 		// 
 		AssertjAssertions.assertThat(actualList).isEachMatchTo(expectedList, true);
@@ -94,11 +94,11 @@ public class AssertjAssertionsTest {
 		actualList.add(new Person("CC", 30));
 		actualList.add(new Person("DD", 40));
 		// 
-		List<Element> expectedList = Lists.newArrayList();
-		expectedList.add(new Element(ImmutableMap.of("name", "AA", "age", "10")));
-		expectedList.add(new Element(ImmutableMap.of("name", "BB", "age", "20")));
-		expectedList.add(new Element(ImmutableMap.of("name", "BB", "age", "20")));
-		expectedList.add(new Element(ImmutableMap.of("name", "DD", "age", "40")));
+		List<BaseElement> expectedList = Lists.newArrayList();
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "AA", "age", "10")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "BB", "age", "20")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "BB", "age", "20")));
+		expectedList.add(new BaseElement(ImmutableMap.of("name", "DD", "age", "40")));
 
 		// 
 		AssertjAssertions.assertThat(actualList).isEachMatchTo(expectedList, true);

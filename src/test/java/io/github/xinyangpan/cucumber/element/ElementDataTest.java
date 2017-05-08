@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableMap;
 
-import io.github.xinyangpan.cucumber.element.Element;
+import io.github.xinyangpan.cucumber.element.BaseElement;
 import io.github.xinyangpan.cucumber.element.ElementData;
 
 public class ElementDataTest {
@@ -20,13 +20,13 @@ public class ElementDataTest {
 		List<Map<String, String>> valueMaps = Lists.newArrayList();
 		valueMaps.add(ImmutableMap.of("name", "aa", "age", "1"));
 		valueMaps.add(ImmutableMap.of("name", "aaa", "age", "1"));
-		ElementData elementData = ElementData.of(valueMaps).convert("name", "size", t -> t.length());
+		ElementData<BaseElement> elementData = new ElementData<>(valueMaps, null, BaseElement::new).convert("name", "size", t -> t.length());
 		// 
-		List<Element> elements = elementData.getElements();
+		List<BaseElement> baseElements = elementData.getElements();
 		// 
-		Element element1 = new Element(ImmutableMap.of("size", "2", "age", "1"));
-		Element element2 = new Element(ImmutableMap.of("size", "3", "age", "1"));
-		assertThat(elements).hasSize(2).containsExactly(element1, element2);
+		BaseElement element1 = new BaseElement(ImmutableMap.of("size", "2", "age", "1"));
+		BaseElement element2 = new BaseElement(ImmutableMap.of("size", "3", "age", "1"));
+		assertThat(baseElements).hasSize(2).containsExactly(element1, element2);
 	}
 
 }

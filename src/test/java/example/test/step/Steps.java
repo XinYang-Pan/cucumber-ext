@@ -12,7 +12,7 @@ import example.service.CucumberUtils;
 import example.service.ElementDataService;
 import example.service.PersonService;
 import io.github.xinyangpan.cucumber.assertj.hard.AssertjAssertions;
-import io.github.xinyangpan.cucumber.element.Element;
+import io.github.xinyangpan.cucumber.element.BaseElement;
 import io.github.xinyangpan.cucumber.util.ElementUtils;
 import io.github.xinyangpan.models.person.City;
 import io.github.xinyangpan.models.person.Person;
@@ -38,13 +38,13 @@ public class Steps {
 
 	@Then("^person should be like following:$")
 	public void person_should_be_like_following(DataTable dataTable) throws Throwable {
-		List<Element> elements = elementDataService.from(dataTable).getElements();
+		List<BaseElement> baseElements = elementDataService.from(dataTable).getElements();
 		// 
 		List<Person> persons = personService.getAll();
 		System.out.println(personService);
 		System.out.println(persons);
 		// 
-		AssertjAssertions.assertThat(persons).isEachMatchToIgnoringOrder(elements);
+		AssertjAssertions.assertThat(persons).isEachMatchToIgnoringOrder(baseElements);
 	}
 
 }

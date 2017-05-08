@@ -23,13 +23,13 @@ import io.github.xinyangpan.cucumber.keyword.YesOrNo;
 import io.github.xinyangpan.cucumber.util.ElementUtils;
 import io.github.xinyangpan.cucumber.util.FieldLocator;
 
-public class Element {
+public class BaseElement {
 	public static final String IGNORE_ROW = "_ignoreRow";
 	public static final String EXPECT_FAIL = "_expectFail";
 	// 
 	protected final Map<String, String> keyValueMap;
 
-	public Element(Map<String, String> keyValueMap) {
+	public BaseElement(Map<String, String> keyValueMap) {
 		this.keyValueMap = Maps.newHashMap(keyValueMap);
 	}
 
@@ -192,7 +192,7 @@ public class Element {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Element other = (Element) obj;
+		BaseElement other = (BaseElement) obj;
 		if (keyValueMap == null) {
 			if (other.keyValueMap != null)
 				return false;

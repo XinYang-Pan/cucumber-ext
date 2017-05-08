@@ -10,7 +10,7 @@ import org.assertj.core.api.ListAssert;
 import com.google.common.collect.Lists;
 
 import io.github.xinyangpan.cucumber.assertj.hard.AssertjAssertions;
-import io.github.xinyangpan.cucumber.element.Element;
+import io.github.xinyangpan.cucumber.element.BaseElement;
 
 public class AssertjListAssert<E> extends ListAssert<E> {
 
@@ -18,16 +18,16 @@ public class AssertjListAssert<E> extends ListAssert<E> {
 		super(actual);
 	}
 
-	public AssertjListAssert<E> isEachMatchToIgnoringOrder(List<Element> keyValueMapList) {
+	public <T extends BaseElement> AssertjListAssert<E> isEachMatchToIgnoringOrder(List<T> keyValueMapList) {
 		// 
 		assertThat(actual).as("size").hasSameSizeAs(keyValueMapList);
-		List<Element> expectedElements = Lists.newArrayList(keyValueMapList);
+		List<BaseElement> expectedElements = Lists.newArrayList(keyValueMapList);
 		List<Object> actualLeftList = Lists.newArrayList();
 		for (Object actualElement : actual) {
-			Iterator<Element> it = expectedElements.iterator();
+			Iterator<BaseElement> it = expectedElements.iterator();
 			boolean hasIt = false;
 			while (it.hasNext()) {
-				Element expectedElement = it.next();
+				BaseElement expectedElement = it.next();
 				if (expectedElement.matches(actualElement)) {
 					it.remove();
 					hasIt = true;
@@ -49,20 +49,20 @@ public class AssertjListAssert<E> extends ListAssert<E> {
 		}
 	}
 
-	public AssertjListAssert<E> isEachMatchToInOrder(List<Element> keyValueMapList) {
+	public <T extends BaseElement> AssertjListAssert<E> isEachMatchToInOrder(List<T> keyValueMapList) {
 		// 
 		assertThat(actual).as("size").hasSameSizeAs(keyValueMapList);
 		// 
 		List<Object> actualList = Lists.newArrayList(actual);
 		for (int i = 0; i < keyValueMapList.size(); i++) {
 			Object actualElement = actualList.get(i);
-			Element expectedElement = keyValueMapList.get(i);
+			BaseElement expectedElement = keyValueMapList.get(i);
 			AssertjAssertions.assertThat(actualElement).isMatchTo(expectedElement);
 		}
 		return this;
 	}
 
-	public AssertjListAssert<E> isEachMatchTo(List<Element> keyValueMapList, boolean ordered) {
+	public <T extends BaseElement> AssertjListAssert<E> isEachMatchTo(List<T> keyValueMapList, boolean ordered) {
 		if (ordered) {
 			return isEachMatchToInOrder(keyValueMapList);
 		} else {

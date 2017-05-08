@@ -17,25 +17,32 @@ import com.google.common.collect.Maps;
 import cucumber.api.DataTable;
 import io.github.xinyangpan.cucumber.util.ElementUtils;
 
-public class ElementData {
+public class ElementData<E extends BaseElement> {
 	// 
-	private final List<Element> elements = Lists.newArrayList();
-
+	private final List<E> baseElements = Lists.newArrayList();
 	// -----------------------------
 	// ----- Constructors
 	// -----------------------------
 
-	private ElementData(List<Map<String, String>> elementMaps, Element scenarioVariable) {
+	public ElementData(DataTable dataTable, Function<Map<String, String>, E> newElement) {
+		this(dataTable.asMaps(String.class, String.class), null, newElement);
+	}
+	
+	public ElementData(DataTable dataTable, E scenarioVariable, Function<Map<String, String>, E> newElement) {
+		this(dataTable.asMaps(String.class, String.class), scenarioVariable, newElement);
+	}
+
+	public ElementData(List<Map<String, String>> elementMaps, E scenarioVariable, Function<Map<String, String>, E> newElement) {
 		for (Map<String, String> elementMap : elementMaps) {
-			Element element = new Element(applyVariable(elementMap, scenarioVariable));
-			if (element.isNotIgnoreRow()) {
-				this.elements.add(element);
+			E baseElement = newElement.apply(applyVariable(elementMap, scenarioVariable));
+			if (baseElement.isNotIgnoreRow()) {
+				this.baseElements.add(baseElement);
 			}
 		}
 	}
 
 	// Only Support Element Single Value
-	private Map<String, String> applyVariable(Map<String, String> elementMap, Element scenarioVariable) {
+	public Map<String, String> applyVariable(Map<String, String> elementMap, E scenarioVariable) {
 		if (scenarioVariable == null) {
 			return elementMap;
 		}
@@ -53,25 +60,6 @@ public class ElementData {
 			}
 		}
 		return maps;
-	}
-
-	// -----------------------------
-	// ----- Static Methods
-	// -----------------------------
-	public static ElementData of(DataTable dataTable) {
-		return new ElementData(toMapList(dataTable), null);
-	}
-
-	public static ElementData of(DataTable dataTable, Element scenarioVariable) {
-		return new ElementData(toMapList(dataTable), scenarioVariable);
-	}
-
-	public static ElementData of(List<Map<String, String>> valueMaps) {
-		return new ElementData(valueMaps, null);
-	}
-
-	private static List<Map<String, String>> toMapList(DataTable dataTable) {
-		return dataTable.asMaps(String.class, String.class);
 	}
 
 	// -----------------------------
@@ -95,25 +83,25 @@ public class ElementData {
 		}
 	}
 
-	public ElementData convert(String oldKey, String newKey, Function<String, ?> valueConverter) {
+	public ElementData<E> convert(String oldKey, String newKey, Function<String, ?> valueConverter) {
 		if (!this.getElementKeys().contains(oldKey)) {
 			return this;
 		}
-		for (Element element : elements) {
-			element.convert(oldKey, newKey, valueConverter);
+		for (E baseElement : baseElements) {
+			baseElement.convert(oldKey, newKey, valueConverter);
 		}
 		return this;
 	}
 
-	public List<Element> getElements() {
-		return elements;
+	public List<E> getElements() {
+		return baseElements;
 	}
 
 	public <T> List<T> getElements(Supplier<T> elementCreator) {
 		List<T> values = Lists.newArrayList();
-		for (Element element : elements) {
+		for (E baseElement : baseElements) {
 			T target = elementCreator.get();
-			element.putValuesTo(target);
+			baseElement.putValuesTo(target);
 			values.add(target);
 		}
 		return values;
@@ -123,19 +111,19 @@ public class ElementData {
 		return getElements(() -> ElementUtils.newInstance(clazz));
 	}
 
-	public Element getOnlyElement() {
-		return Iterables.getOnlyElement(elements, null);
+	public E getOnlyElement() {
+		return Iterables.getOnlyElement(baseElements, null);
 	}
 
 	public <T> T getOnlyElement(Class<T> clazz) {
-		Element element = this.getOnlyElement();
+		E baseElement = this.getOnlyElement();
 		T t = ElementUtils.newInstance(clazz);
-		element.putValuesTo(t);
+		baseElement.putValuesTo(t);
 		return t;
 	}
 
 	public boolean isEmpty() {
-		return elements.isEmpty();
+		return baseElements.isEmpty();
 	}
 
 	// -----------------------------
@@ -143,10 +131,10 @@ public class ElementData {
 	// -----------------------------
 
 	private Set<String> getElementKeys() {
-		if (elements.isEmpty()) {
+		if (baseElements.isEmpty()) {
 			return Sets.newHashSet();
 		}
-		return elements.get(0).getKeySet();
+		return baseElements.get(0).getKeySet();
 	}
 
 	// -----------------------------
@@ -157,7 +145,7 @@ public class ElementData {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("DataTableWrapper [valueMaps=");
-		builder.append(elements);
+		builder.append(baseElements);
 		builder.append("]");
 		return builder.toString();
 	}

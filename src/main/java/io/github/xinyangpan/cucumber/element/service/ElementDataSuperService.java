@@ -23,7 +23,7 @@ public class ElementDataSuperService<E extends BaseElement> {
 	public ElementDataSuperService() {
 		this(null);
 	}
-	
+
 	public ElementDataSuperService(Function<Map<String, String>, E> newElement) {
 		this.newElement = newElement;
 		//

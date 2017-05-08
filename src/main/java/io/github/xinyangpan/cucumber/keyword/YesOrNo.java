@@ -20,6 +20,7 @@ public class YesOrNo {
 			break;
 		case "n":
 		case "no":
+		case "":
 			yes = false;
 			break;
 		default:

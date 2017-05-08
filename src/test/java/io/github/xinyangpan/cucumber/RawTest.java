@@ -1,4 +1,4 @@
-package example.test;
+package io.github.xinyangpan.cucumber;
 
 public class RawTest {
 

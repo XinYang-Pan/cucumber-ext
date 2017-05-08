@@ -1,4 +1,4 @@
-package example.service;
+package example.core;
 
 import io.github.xinyangpan.cucumber.element.BaseElement;
 import io.github.xinyangpan.cucumber.element.service.ElementDataSuperService;

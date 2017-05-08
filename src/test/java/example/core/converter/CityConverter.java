@@ -1,4 +1,4 @@
-package example.service.converter;
+package example.core.converter;
 
 import org.springframework.core.convert.converter.Converter;
 

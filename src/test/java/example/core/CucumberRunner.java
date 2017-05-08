@@ -1,11 +1,11 @@
-package example.test;
+package example.core;
 
 import java.io.IOException;
 
 import org.junit.runners.model.InitializationError;
 
 import cucumber.api.junit.Cucumber;
-import example.service.converter.CityConverter;
+import example.core.converter.CityConverter;
 import io.github.xinyangpan.cucumber.util.ElementUtils;
 
 public class CucumberRunner extends Cucumber {

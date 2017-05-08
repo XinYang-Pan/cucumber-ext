@@ -32,7 +32,11 @@ public class BaseElement {
 	}
 
 	public <T> Optional<T> getValueOpt(String key, Class<T> type) {
-		return Optional.ofNullable(this.getValue(key, type));
+		if (keyValueMap.containsKey(key)) {
+			return Optional.of(this.getValue(key, type));
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	public <T> T getValue(String key, Class<T> type) {

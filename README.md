@@ -13,6 +13,7 @@ Training Documents
 # Features
 
 DataTable Features
+
   1. Support custom Class converter
   1. Support POJO partial fields' value assertion
   1. Support to ignore blank value
@@ -20,6 +21,7 @@ DataTable Features
   1. Support to ignore entire row
 
 Other Features
+
   1. Support expected failed assersion
   1. Support scenario variables(incubation)
 

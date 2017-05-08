@@ -1,6 +1,14 @@
-# cucumber-ext
+# Cucumber Extension - an java extension util for cucumber framework
 
-## Feature
+
+# Overview
+Cucumber is BBD testing framework, from more info - https://cucumber.io/
+
+Training docs
+* https://cucumber.io/
+* https://sukesh15.gitbooks.io/cucumber-jvm-test-framework-/content/
+
+# Feature
 
 DataTable Feature
 1. Support custom Class converter,
@@ -12,5 +20,4 @@ DataTable Feature
 Other Feature
 1. Support expected failed assersion,
 1. Support scenario variables(incubation).
-
 

@@ -12,7 +12,7 @@ Feature: Expected Failed
     Given Add Person as following:
       | name | age |
       | Bob  |  80 |
-     Then Failedable - Person should be like following:(expected to fail)
+     Then Failedable - Person should be like following:(expected to succeed)
       | name | age |
       | Bob  |  80 |
 

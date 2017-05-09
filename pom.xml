@@ -87,7 +87,7 @@
 
 	<dependencyManagement>
 		<dependencies>
-		<!-- common -->
+			<!-- common -->
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
@@ -118,7 +118,7 @@
 				<version>${spring.version}</version>
 			</dependency>
 
-		<!-- test will use -->
+			<!-- test will use -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
@@ -131,7 +131,7 @@
 				<version>${spring.version}</version>
 			</dependency>
 
-		<!-- specific -->
+			<!-- specific -->
 			<dependency>
 				<groupId>info.cukes</groupId>
 				<artifactId>cucumber-spring</artifactId>
@@ -150,7 +150,7 @@
 				<version>3.6.2</version>
 			</dependency>
 
-		<!-- test -->
+			<!-- test -->
 			<dependency>
 				<groupId>io.github.XinYang-Pan</groupId>
 				<artifactId>models</artifactId>

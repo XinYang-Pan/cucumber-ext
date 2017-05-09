@@ -3,7 +3,7 @@
 An Java Extension Util for Cucumber Framework
 
 # Overview
-* Cucumber is BBD testing framework, Training Documents
+* Cucumber is BBD testing framework, Documents
   * https://cucumber.io/
   * https://sukesh15.gitbooks.io/cucumber-jvm-test-framework-/content/
   * https://zsoltfabok.com/blog/2012/09/cucumber-jvm-web-with-spring-mvc/

@@ -1,7 +1,6 @@
 Feature: Partial Fields Value Assertion
-  I want to use this template for my feature file
 
-  Scenario: 
+  Scenario: Partial Fields Value Assertion
     Given Add Person as following:
       | name | age |
       | Bob  |  10 |

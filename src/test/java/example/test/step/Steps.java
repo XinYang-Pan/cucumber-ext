@@ -26,14 +26,15 @@ public class Steps {
 
 	@Then("^person should be like following:$")
 	public void person_should_be_like_following(DataTable dataTable) throws Throwable {
-		List<BaseElement> baseElements = elementDataService.from(dataTable).getElements();
+		BaseElement baseElement = elementDataService.from(dataTable).getOnlyElement();
 		// 
 		List<Person> persons = personService.getAll();
 		System.out.println(String.format("Asserting"));
 		System.out.println(String.format("Actual - %s", persons));
-		System.out.println(String.format("Expected - %s", baseElements));
+		System.out.println(String.format("Expected - %s", baseElement));
 		// 
-		AssertjAssertions.assertThat(persons).isEachMatchToIgnoringOrder(baseElements);
+		AssertjAssertions.assertThat(persons).hasSize(1);
+		AssertjAssertions.assertThat(persons.get(0)).isMatchTo(baseElement);
 	}
 
 }

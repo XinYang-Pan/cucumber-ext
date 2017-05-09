@@ -1,4 +1,4 @@
-Feature: Person Add
+Feature: Custom Class Converter
   I want to use this template for my feature file
 
   Scenario: 

@@ -20,9 +20,8 @@ public class Steps {
 	public void add_Person_as_following(DataTable dataTable) throws Throwable {
 		List<Person> persons = elementDataService.from(dataTable).getElements(Person.class);
 		// 
+		System.out.println(String.format("Saving - %s", persons));
 		personService.add(persons);
-		System.out.println(personService);
-		System.out.println(persons);
 	}
 
 	@Then("^person should be like following:$")
@@ -30,8 +29,9 @@ public class Steps {
 		List<BaseElement> baseElements = elementDataService.from(dataTable).getElements();
 		// 
 		List<Person> persons = personService.getAll();
-		System.out.println(personService);
-		System.out.println(persons);
+		System.out.println(String.format("Asserting"));
+		System.out.println(String.format("Actual - %s", persons));
+		System.out.println(String.format("Expected - %s", baseElements));
 		// 
 		AssertjAssertions.assertThat(persons).isEachMatchToIgnoringOrder(baseElements);
 	}

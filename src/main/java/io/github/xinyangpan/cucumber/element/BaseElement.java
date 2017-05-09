@@ -28,7 +28,12 @@ public class BaseElement {
 	protected final Map<String, String> keyValueMap;
 
 	public BaseElement(Map<String, String> keyValueMap) {
-		this.keyValueMap = Maps.newHashMap(keyValueMap);
+		this.keyValueMap = Maps.newHashMap();
+		for (Entry<String, String> e : keyValueMap.entrySet()) {
+			if (StringUtils.isNotEmpty(e.getValue())) {
+				this.keyValueMap.put(e.getKey(), e.getValue());
+			}
+		}
 	}
 
 	public <T> Optional<T> getValueOpt(String key, Class<T> type) {

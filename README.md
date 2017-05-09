@@ -21,6 +21,7 @@ DataTable Features
 1. Support to ignore blank value
 1. Support to use function
 1. Support to ignore entire row
+1. Support row level expected failed assersion
 
 Other Features
 

@@ -9,6 +9,7 @@ import example.core.ElementDataService;
 import example.service.PersonService;
 import io.github.xinyangpan.cucumber.assertj.hard.AssertjAssertions;
 import io.github.xinyangpan.cucumber.element.BaseElement;
+import io.github.xinyangpan.cucumber.keyword.AssertExpect;
 import io.github.xinyangpan.models.person.Person;
 
 public class Steps {
@@ -24,7 +25,7 @@ public class Steps {
 		personService.add(persons);
 	}
 
-	@Then("^person should be like following:$")
+	@Then("^Person should be like following:$")
 	public void person_should_be_like_following(DataTable dataTable) throws Throwable {
 		BaseElement baseElement = elementDataService.from(dataTable).getOnlyElement();
 		// 
@@ -35,6 +36,21 @@ public class Steps {
 		// 
 		AssertjAssertions.assertThat(persons).hasSize(1);
 		AssertjAssertions.assertThat(persons.get(0)).isMatchTo(baseElement);
+	}
+
+	@Then("^Failedable - Person should be like following:([A-Za-z0-9./\\s\\(\\)]*)$")
+	public void person_should_be_like_following(AssertExpect assertExpect, DataTable dataTable) throws Throwable {
+		BaseElement baseElement = elementDataService.from(dataTable).getOnlyElement();
+		// 
+		List<Person> persons = personService.getAll();
+		System.out.println(String.format("Asserting"));
+		System.out.println(String.format("Actual - %s", persons));
+		System.out.println(String.format("Expected - %s", baseElement));
+		// 
+		assertExpect.asserting(() -> {
+			AssertjAssertions.assertThat(persons).hasSize(1);
+			AssertjAssertions.assertThat(persons.get(0)).isMatchTo(baseElement);
+		});
 	}
 
 }

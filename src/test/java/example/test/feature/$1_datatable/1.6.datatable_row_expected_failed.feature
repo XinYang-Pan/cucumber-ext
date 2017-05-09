@@ -4,6 +4,6 @@ Feature: Datatable Row Expected Failed
     Given Add Person as following:
       | name | age |
       | Bob  |  80 |
-     Then person should be like following:
+     Then Person should be like following:
       | name | age | _expectFail |
       | Amy  |  17 | yes         |

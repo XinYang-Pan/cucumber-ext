@@ -7,7 +7,7 @@ An Java Extension Util for Cucumber Framework
 ```
 <dependency>
  <groupId>io.github.xinyang-pan</groupId>
-  <artifactId>models</artifactId>
+  <artifactId>cucumber-ext</artifactId>
  <version>1.0.0</version>
 </dependency>
 ```

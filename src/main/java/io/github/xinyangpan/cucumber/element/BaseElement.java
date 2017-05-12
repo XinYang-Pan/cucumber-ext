@@ -111,8 +111,8 @@ public class BaseElement {
 	 * 
 	 * Field Match Logic
 	 * 
-	 * For Comparable -> using compare
-	 * For None Comparable -> using equals
+	 * For Comparable - using compare
+	 * For None Comparable - using equals
 	
 	 * @param target
 	 * @return

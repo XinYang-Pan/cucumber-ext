@@ -2,6 +2,14 @@
 
 An Java Extension Util for Cucumber Framework
 
+# Maven
+
+<dependency>
+ <groupId>io.github.xinyang-pan</groupId>
+  <artifactId>models</artifactId>
+ <version>1.0.0</version>
+</dependency>
+
 # Overview
 * Cucumber is BBD testing framework, Documents
   * https://cucumber.io/

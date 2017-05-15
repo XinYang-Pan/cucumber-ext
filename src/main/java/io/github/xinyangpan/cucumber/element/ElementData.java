@@ -126,15 +126,15 @@ public class ElementData<E extends BaseElement> {
 		return baseElements.isEmpty();
 	}
 
-	// -----------------------------
-	// ----- private
-	// -----------------------------
-
-	private Set<String> getElementKeys() {
+	protected Set<String> getElementKeys() {
 		if (baseElements.isEmpty()) {
 			return Sets.newHashSet();
 		}
-		return baseElements.get(0).getKeySet();
+		Set<String> keySet = Sets.newHashSet();
+		for (E element : baseElements) {
+			keySet.addAll(element.getKeySet());
+		}
+		return keySet;
 	}
 
 	// -----------------------------

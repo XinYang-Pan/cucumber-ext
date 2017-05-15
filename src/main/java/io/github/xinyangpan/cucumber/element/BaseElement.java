@@ -24,14 +24,20 @@ import io.github.xinyangpan.cucumber.util.ElementUtils;
 public class BaseElement {
 	public static final String IGNORE_ROW = "_ignoreRow";
 	public static final String EXPECT_FAIL = "_expectFail";
+	public static final String NULL = "<null>";
 	// 
 	protected final Map<String, String> keyValueMap;
 
 	public BaseElement(Map<String, String> keyValueMap) {
 		this.keyValueMap = Maps.newHashMap();
 		for (Entry<String, String> e : keyValueMap.entrySet()) {
-			if (StringUtils.isNotEmpty(e.getValue())) {
-				this.keyValueMap.put(e.getKey(), e.getValue());
+			String value = e.getValue();
+			if (StringUtils.isNotEmpty(value)) {
+				if (Objects.equals(value, NULL)) {
+					this.keyValueMap.put(e.getKey(), null);
+				} else {
+					this.keyValueMap.put(e.getKey(), e.getValue());
+				}
 			}
 		}
 	}

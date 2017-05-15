@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.xinyang-pan</groupId>
 	<artifactId>cucumber-ext</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 
 	<name>Cucumber Extension</name>
 	<description>Extension Utility for Cucumber Framework</description>

@@ -8,7 +8,7 @@ An Java Extension Util for Cucumber Framework
 <dependency>
  <groupId>io.github.xinyang-pan</groupId>
   <artifactId>cucumber-ext</artifactId>
- <version>1.0.0</version>
+ <version>1.1.0</version>
 </dependency>
 ```
 

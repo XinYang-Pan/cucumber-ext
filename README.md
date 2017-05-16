@@ -39,7 +39,6 @@ Other Features
 1. Support scenario variables(incubation)
 
 # Examples
-More to come
 
 * [DataTable Features' Examples](https://github.com/XinYang-Pan/cucumber-ext/tree/master/src/test/java/example/test/feature/%241_datatable)
 * [Other Features' Examples](https://github.com/XinYang-Pan/cucumber-ext/tree/master/src/test/java/example/test/feature/%242_misc)

@@ -1,8 +1,8 @@
 package io.github.xinyangpan.cucumber.keyword;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Preconditions;
+
+import io.github.xinyangpan.cucumber.util.CucumberExtUtils;
 
 // regex - ([A-Za-z0-9./\\s\\(\\)]*)
 // assertExpect
@@ -15,14 +15,14 @@ public class AssertExpect {
 	private boolean expectToPass;
 
 	public AssertExpect(String text) {
-		if (StringUtils.containsAny(text, IGNORE_KEY_WORDS)) {
+		if (CucumberExtUtils.containsAny(text, IGNORE_KEY_WORDS)) {
 			ignoreToAssert = true;
 		} else {
 			ignoreToAssert = false;
 			// 
-			if (StringUtils.containsAny(text, PASS_KEY_WORDS)) {
+			if (CucumberExtUtils.containsAny(text, PASS_KEY_WORDS)) {
 				expectToPass = true;
-			} else if (StringUtils.containsAny(text, FAIL_KEY_WORDS)) {
+			} else if (CucumberExtUtils.containsAny(text, FAIL_KEY_WORDS)) {
 				expectToPass = false;
 			} else {
 				// default pass

@@ -33,12 +33,10 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- 3rd party dependency versions -->
-		<guava.version>21.0</guava.version>
-		<commons-lang3.version>3.5</commons-lang3.version>
-		<commons-collections4.version>4.1</commons-collections4.version>
-		<spring.version>4.3.8.RELEASE</spring.version>
+		<guava.version>24.1-jre</guava.version>
+		<spring.version>5.0.5.RELEASE</spring.version>
 		<cucumber.version>1.2.5</cucumber.version>
-		<assertj.version>3.6.2</assertj.version>
+		<assertj.version>3.10.0</assertj.version>
 	</properties>
 
 	<dependencies>
@@ -46,16 +44,6 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
 		</dependency>
 
 		<dependency>
@@ -110,18 +98,6 @@
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>${guava.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-lang3</artifactId>
-				<version>${commons-lang3.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-collections4</artifactId>
-				<version>${commons-collections4.version}</version>
 			</dependency>
 
 			<dependency>

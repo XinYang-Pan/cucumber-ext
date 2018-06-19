@@ -2,10 +2,10 @@ package io.github.xinyangpan.cucumber.assertj;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.assertj.core.api.Assert;
 
 public class AssertjUtils {
@@ -24,11 +24,13 @@ public class AssertjUtils {
 
 	@SuppressWarnings("unchecked")
 	public static <T> void exactlyInAnyOrder(List<T> actuals, List<T> expects) {
-		exactlyInAnyOrder(actuals, (T[]) CollectionUtils.emptyIfNull(expects).toArray());
+		expects = expects != null ? expects : Collections.emptyList();
+		exactlyInAnyOrder(actuals, (T[]) expects.toArray());
 	}
 
 	public static <T> void exactlyInAnyOrder(List<T> actuals, T[] expects) {
-		assertThat(CollectionUtils.emptyIfNull(actuals)).usingFieldByFieldElementComparator().containsExactlyInAnyOrder(expects);
+		actuals = actuals != null ? actuals : Collections.emptyList();
+		assertThat(actuals).usingFieldByFieldElementComparator().containsExactlyInAnyOrder(expects);
 	}
 
 }

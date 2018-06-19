@@ -9,12 +9,12 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.util.Assert;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -32,7 +32,7 @@ public class BaseElement {
 		this.keyValueMap = Maps.newHashMap();
 		for (Entry<String, String> e : keyValueMap.entrySet()) {
 			String value = e.getValue();
-			if (StringUtils.isNotEmpty(value)) {
+			if (!Strings.isNullOrEmpty(value)) {
 				if (Objects.equals(value, NULL)) {
 					this.keyValueMap.put(e.getKey(), null);
 				} else {
@@ -174,7 +174,7 @@ public class BaseElement {
 		// @formatter:off
 		return keyValueMap.entrySet().stream()
 			.filter(e -> !e.getKey().startsWith("_"))
-			.filter(e -> StringUtils.isNotEmpty(e.getValue()))
+			.filter(e -> !Strings.isNullOrEmpty(e.getValue()))
 			.collect(Collectors.toList());
 		// @formatter:on
 	}

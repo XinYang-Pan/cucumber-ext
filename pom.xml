@@ -225,8 +225,9 @@
 					<url>http://192.168.1.212:8081/nexus/content/repositories/snapshots/</url>
 				</snapshotRepository>
 				<repository>
-					<id>nextop-releases</id>
-					<url>http://192.168.1.212:8081/nexus/content/repositories/releases/</url>
+					<name>bintray</name>
+					<id>bintray-releases</id>
+					<url>https://api.bintray.com/maven/panxy1213/maven/cucumber-ext/;publish=1</url>
 				</repository>
 			</distributionManagement>
 		</profile>

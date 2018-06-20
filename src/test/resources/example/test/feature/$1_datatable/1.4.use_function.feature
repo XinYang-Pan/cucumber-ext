@@ -1,4 +1,4 @@
-Feature: Use Function
+Feature: Use Function (Assuming we are in year of 2017.1.1)
 
   Scenario: Use Function
     Given Add Person as following:
@@ -6,4 +6,4 @@ Feature: Use Function
       | Bob  | 2001-05-09 |
      Then Person should be like following:
       | name | age |
-      | Bob  |  17 |
+      | Bob  |  15 |

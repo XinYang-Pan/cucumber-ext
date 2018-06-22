@@ -120,8 +120,8 @@ public class BaseElement {
 	 * For Comparable - using compare
 	 * For None Comparable - using equals
 	
-	 * @param target
-	 * @return
+	 * @param target target object
+	 * @return true if matched
 	 */
 	@SuppressWarnings("unchecked")
 	public boolean matches(Object target) {

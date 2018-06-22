@@ -21,6 +21,9 @@ public abstract class AssertjAbstractAssert<S extends AbstractObjectAssert<S, A>
 	public S isMatchTo(BaseElement baseElement) {
 		AssertionError error;
 		try {
+			if (actual == null && baseElement != null) {
+				failWithMessage("Expected to be <%s> but was <%s>", baseElement, actual);
+			}
 			if (!baseElement.matches(actual)) {
 				failWithMessage("Expected to be <%s> but was <%s>", baseElement, actual);
 			}

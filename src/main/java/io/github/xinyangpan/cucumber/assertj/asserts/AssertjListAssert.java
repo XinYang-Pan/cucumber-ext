@@ -23,6 +23,19 @@ public class AssertjListAssert<E> extends ListAssert<E> {
 		assertThat(actual).as("size").hasSameSizeAs(keyValueMapList);
 		List<BaseElement> expectedElements = Lists.newArrayList(keyValueMapList);
 		List<Object> actualLeftList = Lists.newArrayList();
+		fillList(expectedElements, actualLeftList);
+		// 
+		if (actualLeftList.isEmpty() && expectedElements.isEmpty()) {
+			// success
+			return this;
+		} else {
+			// fail
+			failWithMessage("expected left elements - %s, actual left elements - %s", expectedElements, actualLeftList);
+			return this;
+		}
+	}
+
+	private void fillList(List<BaseElement> expectedElements, List<Object> actualLeftList) {
 		for (Object actualElement : actual) {
 			Iterator<BaseElement> it = expectedElements.iterator();
 			boolean hasIt = false;
@@ -37,15 +50,6 @@ public class AssertjListAssert<E> extends ListAssert<E> {
 			if (!hasIt) {
 				actualLeftList.add(actualElement);
 			}
-		}
-		// 
-		if (actualLeftList.isEmpty() && expectedElements.isEmpty()) {
-			// success
-			return this;
-		} else {
-			// fail
-			failWithMessage("expected left elements - %s, actual left elements - %s", expectedElements, actualLeftList);
-			return this;
 		}
 	}
 
@@ -67,6 +71,22 @@ public class AssertjListAssert<E> extends ListAssert<E> {
 			return isEachMatchToInOrder(keyValueMapList);
 		} else {
 			return isEachMatchToIgnoringOrder(keyValueMapList);
+		}
+	}
+
+	public AssertjListAssert<E> isContaining(List<? extends BaseElement> keyValueMapList) {
+		// 
+		List<BaseElement> expectedElements = Lists.newArrayList(keyValueMapList);
+		List<Object> actualLeftList = Lists.newArrayList();
+		fillList(expectedElements, actualLeftList);
+		// 
+		if (expectedElements.isEmpty()) {
+			// success
+			return this;
+		} else {
+			// fail
+			failWithMessage("expected left elements - %s, actual left elements - %s", expectedElements, actualLeftList);
+			return this;
 		}
 	}
 

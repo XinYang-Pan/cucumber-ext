@@ -33,18 +33,18 @@ public class BaseElement {
 	public BaseElement(Map<String, String> keyValueMap) {
 		this.keyValueMap = Maps.newHashMap();
 		for (Entry<String, String> e : keyValueMap.entrySet()) {
+			String key = e.getKey();
 			String value = e.getValue();
 			if (!Strings.isNullOrEmpty(value)) {
-				switch (value) {
-				case NULL:
-					this.keyValueMap.put(e.getKey(), null);
-					break;
-				case NAME:
+				// key: special cases
+				if (Objects.equals(key, NAME)) {
 					name = e.getValue();
-					// Expected to falling down to default as all values should be found in keyValueMap
-				default:
-					this.keyValueMap.put(e.getKey(), e.getValue());
-					break;
+				}
+				// value: special cases
+				if (Objects.equals(value, NULL)) {
+					this.keyValueMap.put(key, null);
+				} else {
+					this.keyValueMap.put(key, e.getValue());
 				}
 			}
 		}

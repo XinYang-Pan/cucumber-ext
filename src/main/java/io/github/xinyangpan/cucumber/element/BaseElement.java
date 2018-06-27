@@ -25,7 +25,9 @@ public class BaseElement {
 	public static final String IGNORE_ROW = "_ignoreRow";
 	public static final String EXPECT_FAIL = "_expectFail";
 	public static final String NULL = "<null>";
+	public static final String NAME = "_name";
 	// 
+	private String name;
 	protected final Map<String, String> keyValueMap;
 
 	public BaseElement(Map<String, String> keyValueMap) {
@@ -33,10 +35,16 @@ public class BaseElement {
 		for (Entry<String, String> e : keyValueMap.entrySet()) {
 			String value = e.getValue();
 			if (!Strings.isNullOrEmpty(value)) {
-				if (Objects.equals(value, NULL)) {
+				switch (value) {
+				case NULL:
 					this.keyValueMap.put(e.getKey(), null);
-				} else {
+					break;
+				case NAME:
+					name = e.getValue();
+					// Expected to falling down to default as all values should be found in keyValueMap
+				default:
 					this.keyValueMap.put(e.getKey(), e.getValue());
+					break;
 				}
 			}
 		}
@@ -178,7 +186,11 @@ public class BaseElement {
 			.collect(Collectors.toList());
 		// @formatter:on
 	}
-
+	
+	// -----------------------------
+	// ----- Get Set ToString HashCode Equals
+	// -----------------------------
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -212,6 +224,14 @@ public class BaseElement {
 		} else if (!keyValueMap.equals(other.keyValueMap))
 			return false;
 		return true;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

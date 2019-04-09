@@ -1,4 +1,4 @@
-Feature: Use Function (Assuming we were on 2017.1.1)
+Feature: Use Function - Assuming we were on 2017.1.1
 
   Scenario: Use Function
     Given Add Person as following:

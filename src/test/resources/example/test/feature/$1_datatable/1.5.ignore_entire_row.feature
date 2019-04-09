@@ -1,4 +1,4 @@
-Feature: Ignore Entire Row (Assuming we were on 2017.1.1)
+Feature: Ignore Entire Row - Assuming we were on 2017.1.1
 
   Scenario: Ignore Entire Row
     Given Add Person as following:

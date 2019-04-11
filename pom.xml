@@ -35,8 +35,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- 3rd party dependency versions -->
 		<guava.version>24.1-jre</guava.version>
-		<spring.version>5.0.5.RELEASE</spring.version>
-		<cucumber.version>1.2.5</cucumber.version>
+		<spring.version>5.0.7.RELEASE</spring.version>
+		<cucumber.version>4.2.6</cucumber.version>
 		<assertj.version>3.10.0</assertj.version>
 	</properties>
 
@@ -70,12 +70,12 @@
 
 		<!-- specific -->
 		<dependency>
-			<groupId>info.cukes</groupId>
+			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-spring</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>info.cukes</groupId>
+			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit</artifactId>
 		</dependency>
 
@@ -128,13 +128,13 @@
 
 			<!-- specific -->
 			<dependency>
-				<groupId>info.cukes</groupId>
+				<groupId>io.cucumber</groupId>
 				<artifactId>cucumber-spring</artifactId>
 				<version>${cucumber.version}</version>
 			</dependency>
 
 			<dependency>
-				<groupId>info.cukes</groupId>
+				<groupId>io.cucumber</groupId>
 				<artifactId>cucumber-junit</artifactId>
 				<version>${cucumber.version}</version>
 			</dependency>

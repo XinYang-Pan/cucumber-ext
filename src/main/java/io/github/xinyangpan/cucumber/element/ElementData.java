@@ -14,7 +14,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import cucumber.api.DataTable;
+import io.cucumber.datatable.DataTable;
 import io.github.xinyangpan.cucumber.util.ElementUtils;
 
 public class ElementData<E extends BaseElement> {

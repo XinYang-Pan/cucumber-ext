@@ -2,11 +2,11 @@ package example.test.step;
 
 import java.util.List;
 
-import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import example.core.ElementDataService;
 import example.service.PersonService;
+import io.cucumber.datatable.DataTable;
 import io.github.xinyangpan.cucumber.assertj.hard.AssertjAssertions;
 import io.github.xinyangpan.cucumber.element.BaseElement;
 import io.github.xinyangpan.cucumber.keyword.AssertExpect;

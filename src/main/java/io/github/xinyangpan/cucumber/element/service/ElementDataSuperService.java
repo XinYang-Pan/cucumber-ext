@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import cucumber.api.DataTable;
+import io.cucumber.datatable.DataTable;
 import io.github.xinyangpan.cucumber.element.BaseElement;
 import io.github.xinyangpan.cucumber.element.ElementData;
 
